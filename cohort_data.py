@@ -19,6 +19,15 @@ def all_houses(filename):
 
     # TODO: replace this with your code
 
+    all_hagworts_data = open(filename)
+
+    for line in all_hagworts_data:
+      current_line = line.rstrip()
+      line_list = current_line.split('|')
+      house = line_list[2]
+      if house != "":
+        houses.add(house)
+    
     return houses
 
 
