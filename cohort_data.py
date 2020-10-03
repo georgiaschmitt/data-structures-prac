@@ -239,23 +239,23 @@ def get_housemates_for(filename, name):
     >>> get_housemates_for('cohort_data.txt', 'Hermione Granger')
     {'Angelina Johnson', ..., 'Seamus Finnigan'}
     """
-  housemates = set()
+    
+    housemates = set()
+    target_person = None
+    for person in all_data(filename):
+      full_name, house, prof, cohort_name = person
 
-  target_person = None
-  for person in all_data(filename):
-    full_name, house, advisor, cohort_name = person
-
-    if full_name == name:
-      target_person = person
-      break
+      if full_name == name:
+        target_person = person
+        break
 
     if target_person:
-        target_name, target_house, _, target_cohort = target_person
+      target_name, target_house, _, target_cohort = target_person
 
-        for full_name, house, _, cohort_name in all_data(filename):
-            if ((house, cohort_name) == (target_house, target_cohort) and
-                    full_name != name):
-                housemates.add(full_name)
+    for full_name, house, _, cohort_name in all_data(filename):
+      if ((house, cohort_name) == (target_house, target_cohort) and
+                    full_name != target_name):
+        housemates.add(full_name)
 
     return housemates
 
